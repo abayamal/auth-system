@@ -17,7 +17,7 @@
         $insert->execute([
           ':email' => $email,
           ':username' => $username,
-          ':password' => password_hash($password,PASSWORD_DEFAULT)
+          ':mypassword' => password_hash($password,PASSWORD_DEFAULT)
         ]);
     }
   }
