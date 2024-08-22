@@ -13,7 +13,7 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.101.0">
-    <title>Carousel Template · Bootstrap v5.2</title>
+    <title>Blog</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/carousel/">
 
@@ -29,7 +29,7 @@ session_start();
 
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container">
-    <a class="navbar-brand" href="#">auth sys</a>
+    <a class="navbar-brand" href="index.php">Blog</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,9 +38,10 @@ session_start();
    
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
         <?php if(!isset($_SESSION['username'])) :  ?>
+
         <li class="nav-item">
           <a class="nav-link" href="login.php">Login</a>
         </li>
@@ -48,6 +49,9 @@ session_start();
           <a class="nav-link" href="register.php">Register</a>
         </li>
         <?php else :  ?>
+          <li class="nav-item">
+            <a class="nav-link" href="create.php">Create</a>
+          </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <?php echo $_SESSION['username']; ?>
