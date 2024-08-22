@@ -4,6 +4,11 @@
 
   <?php
 
+if(isset($_SESSION['username'])){
+  header('location: index.php');
+}
+
+
   if(isset($_POST['submit'])){
 
     if($_POST['email'] == '' OR $_POST['username'] == '' OR $_POST['password'] == ''){
@@ -29,17 +34,17 @@
    
     <h1 class="h3 mt-5 fw-normal text-center">Please Register</h1>
 
-    <div class="form-floating">
+    <div class="form-floating mb-3">
       <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email address</label>
     </div>
 
-    <div class="form-floating">
+    <div class="form-floating mb-3">
       <input name="username" type="text" class="form-control" id="floatingInput" placeholder="username">
       <label for="floatingInput">Username</label>
     </div>
 
-    <div class="form-floating">
+    <div class="form-floating mb-3">
       <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
