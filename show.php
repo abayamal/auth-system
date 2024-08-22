@@ -27,6 +27,8 @@
         <div class="card-body">
             <h5 class="card-title"><?php echo $posts->title; ?></h5>
             <p class="card-text"><?php echo $posts->body.'....'; ?></p>
+            <div class="my-rating"></div>
+            <input id="rating" type="text" value=""/>
         </div>
     </div>
 </div>
@@ -122,5 +124,15 @@
                 }
             })
         })
+
+
+        $(".my-rating").starRating({
+            starSize: 25,
+            callback: function(currentRating, $el){
+                $('#rating').val(currentRating)
+            }
+
+        });
+
     });
 </script>
