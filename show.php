@@ -27,8 +27,11 @@
         <div class="card-body">
             <h5 class="card-title"><?php echo $posts->title; ?></h5>
             <p class="card-text"><?php echo $posts->body.'....'; ?></p>
-            <div class="my-rating"></div>
-            <input id="rating" type="text" value=""/>
+            <form id="form-data" method="post">
+                <div class="my-rating"></div>
+                <input id="rating" type="text" name="rating" value=""/>
+                <input id="rating" type="text" name="post_id" value="<?php echo $posts->id; ?>"/>
+            </form>
         </div>
     </div>
 </div>
@@ -130,6 +133,21 @@
             starSize: 25,
             callback: function(currentRating, $el){
                 $('#rating').val(currentRating)
+                $(".my-rating").click(function(e){
+                    e.preventDefault();
+                    var formdata = $("#form-data").serialize()+'&insert=insert';
+
+                    $.ajax({
+                        type:"POST",
+                        url:"insert-rating.php",
+                        data:formdata,
+
+                        success: function(){
+                            
+                        }
+                    });
+
+                });
             }
 
         });
