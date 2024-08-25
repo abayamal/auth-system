@@ -31,7 +31,7 @@
 
 ?>
 
-
+<div id="searched-data"></div>
 <div class="row">
     <div class="card mt-5">
         <div class="card-header">
@@ -93,88 +93,3 @@
 </div>
 <?php require "includes/footer.php"; ?>
 
-<script>
-    $(document).ready(function(){
-        $(document).on('submit',function(e){
-            e.preventDefault();
-            var formdata = $('#comment_data').serialize()+'&submit=submit';
-
-            $.ajax({    
-                type: 'post',
-                url: 'insert-comments.php',
-                data: formdata,
-
-                success: function(){
-                    $('#comment').val(null);
-                    $('#username').val(null);
-                    $('#post_id').val(null);
-
-                    $('#msg').text('Added successfully').toggleClass("alert alert-success bg-success text-white mt-3");
-                    fetch();
-                }
-            })
-        })
-
-        function fetch(){
-            setInterval(() => {
-               $("body").load("show.php?id=<?php echo $_GET['id']; ?>") 
-            }, 4000);
-        }
-
-
-        $('#delete-btn').on('click',function(e){
-            e.preventDefault();
-            var id = $(this).val();
-
-            $.ajax({    
-                type: 'post',
-                url: 'delete-comments.php',
-                data: {
-                    delete:'delete',
-                    id:id
-                },
-
-                success: function(){
-
-                    $('#delete-msg').text('Deleted successfully').toggleClass("alert alert-success bg-success text-white mt-3");
-                    fetch();
-                }
-            })
-        })
-
-
-        $(".my-rating").starRating({
-            starSize: 25,
-            initialRating:"<?php 
-
-            if(isset($rating->ratings) AND isset($rating->user_id) AND $rating->user_id == $_SESSION['user_id']){
-                echo $rating->ratings;
-            }else{
-                echo '0';
-
-            }
-            
-                ?>",
-            callback: function(currentRating, $el){
-                $('#rating').val(currentRating)
-                $(".my-rating").click(function(e){
-                    e.preventDefault();
-                    var formdata = $("#form-data").serialize()+'&insert=insert';
-
-                    $.ajax({
-                        type:"POST",
-                        url:"insert-rating.php",
-                        data:formdata,
-
-                        success: function(){
-                            
-                        }
-                    });
-
-                });
-            }
-
-        });
-
-    });
-</script>

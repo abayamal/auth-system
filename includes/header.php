@@ -34,6 +34,12 @@ session_start();
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <!--search -->
+      <form class="form-inline my-2 my-lg-0" style="margin-left: 550px">
+        <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+    <!--search -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
      
    
@@ -68,3 +74,5 @@ session_start();
   </div>
 </nav>
 <div class="container marketing">
+
+<div id="searched-data" class="mt-4"></div>
