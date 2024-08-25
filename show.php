@@ -2,6 +2,11 @@
 <?php require "config.php"; ?>
 
 <?php
+
+  if(!isset($_SESSION['username'])){
+    header('location: index.php');
+  }
+
      if(isset($_GET['id'])){
 
         $id = $_GET['id'];
@@ -15,6 +20,14 @@
      $comments->execute();
 
      $comment = $comments->fetchAll(PDO::FETCH_OBJ);
+     if(isset($_SESSION['user_id'])){
+         $user_id = $_SESSION['user_id'];
+     }
+
+     $ratings = $conn->query("SELECT * FROM rates WHERE post_id='$id' AND user_id='$user_id'");
+     $ratings->execute();
+
+     $rating = $ratings->fetch(PDO::FETCH_OBJ);
 
 ?>
 
@@ -29,8 +42,9 @@
             <p class="card-text"><?php echo $posts->body.'....'; ?></p>
             <form id="form-data" method="post">
                 <div class="my-rating"></div>
-                <input id="rating" type="text" name="rating" value=""/>
-                <input id="rating" type="text" name="post_id" value="<?php echo $posts->id; ?>"/>
+                <input id="rating" type="hidden" name="rating" value=""/>
+                <input id="post_id" type="hidden" name="post_id" value="<?php echo $posts->id; ?>"/>
+                <input id="user_id" type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"/>
             </form>
         </div>
     </div>
@@ -131,6 +145,16 @@
 
         $(".my-rating").starRating({
             starSize: 25,
+            initialRating:"<?php 
+
+            if(isset($rating->ratings) AND isset($rating->user_id) AND $rating->user_id == $_SESSION['user_id']){
+                echo $rating->ratings;
+            }else{
+                echo '0';
+
+            }
+            
+                ?>",
             callback: function(currentRating, $el){
                 $('#rating').val(currentRating)
                 $(".my-rating").click(function(e){
